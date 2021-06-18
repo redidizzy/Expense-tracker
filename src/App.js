@@ -1,8 +1,10 @@
 import logo from "./logo.svg"
 import "./App.css"
 import Expenses from "./components/Expenses/Expenses"
+import NewExpense from "./components/NewExpense/NewExpense"
+import { useState } from "react"
 const App = () => {
-  const expenses = [
+  const expensesDummy = [
     {
       id: "e1",
       title: "Toilet Paper",
@@ -23,9 +25,17 @@ const App = () => {
       date: new Date(2021, 5, 12),
     },
   ]
+  const [expenses, setExpenses] = useState(expensesDummy)
+
+  const addExpenseHandler = (expense) => {
+    console.log(expenses)
+    setExpenses([...expenses, expense])
+  }
+
   return (
     <div>
       <h2>This is the app</h2>
+      <NewExpense onExpenseAdd={addExpenseHandler} />
       <Expenses items={expenses} />
     </div>
   )
